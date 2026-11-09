@@ -14,6 +14,29 @@ const EMPTY: Draft = {
 }
 type Errors = Record<string, string>
 
+function phoneInputDigits(phone: string) {
+  let digits = phone.replace(/\D/g, '')
+  if (digits.startsWith('56')) {
+    digits = digits.slice(2)
+    if (digits.startsWith('9')) digits = digits.slice(1)
+  } else if (digits.length === 9 && digits.startsWith('9')) {
+    digits = digits.slice(1)
+  }
+  return digits.slice(0, 8)
+}
+
+function phoneValueFromInput(value: string) {
+  let digits = value.replace(/\D/g, '')
+  if (digits.startsWith('56') && digits.length > 8) {
+    digits = digits.slice(2)
+    if (digits.startsWith('9')) digits = digits.slice(1)
+  } else if (digits.length === 9 && digits.startsWith('9')) {
+    digits = digits.slice(1)
+  }
+  digits = digits.slice(0, 8)
+  return digits ? `+56 9 ${digits}` : ''
+}
+
 function validate(step: number, d: Draft): Errors {
   const e: Errors = {}
   const o = d.owner
@@ -160,7 +183,32 @@ export default function SolicitudPage() {
               </Field>
               {validRut(o.rut) && <p className="-mt-2 text-xs text-green-700">✓ RUT verificado</p>}
               <div className="grid gap-4 sm:grid-cols-2">
-                <Field label="Teléfono*" error={err.phone}><input className="input" type="tel" aria-invalid={bad('phone')} placeholder="+56 9 8765 4321" value={o.phone} onChange={e => setO({ phone: e.target.value })} onBlur={() => setO({ phone: formatPhone(o.phone) })} /></Field>
+                <Field label="Teléfono*" error={err.phone}>
+                  <div className="flex">
+                    <span className={`inline-flex shrink-0 items-center gap-2 rounded-l-lg border border-r-0 bg-slate-50 px-3 text-sm text-slate-700 ${bad('phone') ? 'border-red-600' : 'border-slate-300'}`}>
+                      <svg aria-hidden="true" viewBox="0 0 30 20" className="h-4 w-6 rounded-[2px] border border-slate-300">
+                        <path fill="#fff" d="M0 0h30v10H0z" />
+                        <path fill="#d52b1e" d="M0 10h30v10H0z" />
+                        <path fill="#0039a6" d="M0 0h10v10H0z" />
+                        <path fill="#fff" d="m5 1.8 1 2.4 2.6.2-2 1.6.7 2.5L5 7.1 2.7 8.5l.7-2.5-2-1.6 2.6-.2z" />
+                      </svg>
+                      <span>+56 9</span>
+                    </span>
+                    <input
+                      className="input min-w-0 rounded-l-none"
+                      type="tel"
+                      inputMode="numeric"
+                      autoComplete="tel-national"
+                      maxLength={8}
+                      aria-invalid={bad('phone')}
+                      aria-label="Número de celular chileno, 8 dígitos"
+                      placeholder="1234 5678"
+                      value={phoneInputDigits(o.phone)}
+                      onChange={e => setO({ phone: phoneValueFromInput(e.target.value) })}
+                      onBlur={() => setO({ phone: formatPhone(o.phone) })}
+                    />
+                  </div>
+                </Field>
                 <Field label="Correo electrónico*" error={err.email}><input className="input" type="email" aria-invalid={bad('email')} value={o.email} onChange={e => setO({ email: e.target.value })} /></Field>
               </div>
             </section>
