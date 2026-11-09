@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { api } from '../api'
 import { useAuth } from '../auth'
 import { Badge, Shell, STATUS } from '../components/ui'
@@ -15,7 +15,6 @@ const title = (s: Solicitud) => `${s.type === 'casa' ? 'Casa' : 'Depto.'} · ${s
 
 function ClientHome() {
   const { user } = useAuth()
-  const sent = (useLocation().state as { sent?: boolean } | null)?.sent
   const items = api.listSolicitudes().filter(s => s.ownerId === user?.id)
   return (
     <main className="mx-auto max-w-3xl px-5 py-10">
@@ -23,7 +22,6 @@ function ClientHome() {
         <h1 className="text-3xl font-semibold tracking-tight">Mis solicitudes</h1>
         <Link to="/solicitud/nueva" className="btn">Solicitar administración</Link>
       </div>
-      {sent && <p role="status" className="mb-5 rounded-lg bg-green-100 px-4 py-3 text-sm text-green-800">¡Solicitud enviada! Revisaremos tus datos y te contactaremos pronto.</p>}
       {items.length === 0 ? (
         <div className="card text-center">
           <p className="font-medium">Aún no tienes solicitudes</p>

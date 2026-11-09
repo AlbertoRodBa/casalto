@@ -41,8 +41,10 @@ export const api = {
   },
   logout() { localStorage.removeItem(K.session) },
   listSolicitudes: () => reqs().slice().sort((a, b) => b.createdAt.localeCompare(a.createdAt)),
-  createSolicitud(d: Draft, ownerId: string) {
-    write(K.reqs, [...reqs(), { ...d, id: uid(), ownerId, createdAt: new Date().toISOString(), status: 'pendiente' as Status }])
+  createSolicitud(d: Draft, ownerId: string): Solicitud {
+    const solicitud: Solicitud = { ...d, id: uid(), ownerId, createdAt: new Date().toISOString(), status: 'pendiente' }
+    write(K.reqs, [...reqs(), solicitud])
+    return solicitud
   },
   setStatus(id: string, status: Status) { write(K.reqs, reqs().map(r => (r.id === id ? { ...r, status } : r))) },
   loadDraft: () => read<Draft | null>(K.draft, null),

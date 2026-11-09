@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { useAuth } from './auth'
 import type { Role } from './types'
 import AuthPage from './pages/AuthPage'
+import ConfirmationPage from './pages/ConfirmationPage'
 import Home from './pages/Home'
 import SolicitudPage from './pages/SolicitudPage'
 
@@ -20,6 +21,7 @@ export default function App() {
       <Route path="/registro" element={<AuthPage mode="register" />} />
       <Route path="/" element={<Guard><Home /></Guard>} />
       <Route path="/solicitud/nueva" element={<Guard role="client"><SolicitudPage /></Guard>} />
+      <Route path="/solicitud/confirmacion" element={<Guard role="client"><ConfirmationPage /></Guard>} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )

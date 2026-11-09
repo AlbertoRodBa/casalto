@@ -58,8 +58,9 @@ export default function SolicitudPage() {
   const next = () => (Object.keys(validate(step, d)).length ? setTried(true) : go(step + 1))
   const send = () => {
     if (!accepted || !user) return setTried(true)
-    api.createSolicitud(d, user.id); api.clearDraft()
-    nav('/', { state: { sent: true } })
+    const solicitud = api.createSolicitud(d, user.id)
+    api.clearDraft()
+    nav('/solicitud/confirmacion', { state: { solicitudId: solicitud.id } })
   }
   const bad = (k: string) => (err[k] ? true : undefined)
   const plan = PLANS[d.plan]
@@ -230,7 +231,7 @@ export default function SolicitudPage() {
           {step > 0 ? <button className="btn-outline" onClick={() => go(step - 1)}>Atrás</button> : <span />}
           {step < 3 ? <button className="btn min-w-56" onClick={next}>Continuar</button> : <button className="btn min-w-56" onClick={send}>Enviar solicitud</button>}
         </div>
-        <p className="mt-10 text-center text-xs text-slate-500">🔒 Tus datos están seguros y protegidos.</p>
+        <p className="mt-10 text-center text-xs text-slate-500">Demo interactiva: los datos se guardan solo en este navegador; los documentos no se cargan.</p>
       </main>
     </Shell>
   )
