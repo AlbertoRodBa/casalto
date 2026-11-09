@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../auth'
+import { useTheme } from './theme'
 import type { Status } from '../types'
 
 export const Logo = () => (
@@ -15,6 +16,32 @@ export const Logo = () => (
   </div>
 )
 
+export function ThemeToggle() {
+  const { isDark, toggleTheme } = useTheme()
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={isDark}
+      aria-label={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+      title={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+      onClick={toggleTheme}
+      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white transition-colors hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+    >
+      {isDark ? (
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-brand">
+          <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z" />
+        </svg>
+      ) : (
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-brand">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+        </svg>
+      )}
+    </button>
+  )
+}
+
 export function Shell({ children, back }: { children: ReactNode; back?: boolean }) {
   const { user, logout } = useAuth()
   return (
@@ -22,14 +49,17 @@ export function Shell({ children, back }: { children: ReactNode; back?: boolean 
       <header className="bg-white shadow-sm">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-5">
           <Link to="/" aria-label="Ir al inicio"><Logo /></Link>
-          {back ? (
-            <Link to="/" className="text-sm text-brand hover:underline">← Volver a la página anterior</Link>
-          ) : (
-            <div className="flex items-center gap-4 text-sm">
-              <span className="hidden text-slate-600 sm:inline">{user?.name}</span>
-              <button onClick={logout} className="font-medium text-brand hover:underline">Salir</button>
-            </div>
-          )}
+          <div className="flex items-center gap-4 text-sm">
+            <ThemeToggle />
+            {back ? (
+              <Link to="/" className="text-brand hover:underline">← Volver</Link>
+            ) : (
+              <>
+                <span className="hidden text-slate-600 sm:inline">{user?.name}</span>
+                <button onClick={logout} className="font-medium text-brand hover:underline">Salir</button>
+              </>
+            )}
+          </div>
         </div>
       </header>
       {children}

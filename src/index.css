@@ -7,6 +7,34 @@
   --font-sans: "Inter", system-ui, sans-serif;
 }
 
+.dark {
+  color-scheme: dark;
+  --color-brand: #2b5b8a;
+  --color-tint: #1e3a5f;
+  --color-paper: #0f172a;
+  --color-white: #1e293b;
+  --color-slate-50: #0f172a;
+  --color-slate-100: #1e293b;
+  --color-slate-200: #334155;
+  --color-slate-300: #475569;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #94a3b8;
+  --color-slate-600: #cbd5e1;
+  --color-slate-700: #e2e8f0;
+  --color-slate-800: #e2e8f0;
+  --color-slate-900: #f8fafc;
+  --color-red-600: #f87171;
+  --color-red-700: #fca5a5;
+  --color-red-100: #7f1d1d;
+  --color-green-100: #14532d;
+  --color-green-700: #86efac;
+  --color-green-800: #bbf7d0;
+  --color-amber-100: #78350f;
+  --color-amber-800: #fcd34d;
+}
+
+.dark .text-brand { color: #8db9e8; }
+
 @layer components {
   .label { @apply mb-1.5 block text-sm font-medium text-slate-900; }
   .input { @apply w-full rounded-lg border border-slate-300 bg-white px-3.5 py-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-brand focus:ring-2 focus:ring-brand/20 disabled:bg-slate-100 disabled:text-slate-400; }

@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useAuth } from '../auth'
-import { Field, Logo } from '../components/ui'
+import { Field, Logo, ThemeToggle } from '../components/ui'
 
 export default function AuthPage({ mode }: { mode: 'login' | 'register' }) {
   const { user, login, register } = useAuth()
@@ -23,7 +23,10 @@ export default function AuthPage({ mode }: { mode: 'login' | 'register' }) {
   return (
     <div className="grid min-h-screen bg-white md:grid-cols-2">
       <div className="flex flex-col p-8">
-        <div className="flex justify-center"><Logo /></div>
+        <div className="relative flex justify-center">
+          <Logo />
+          <div className="absolute right-0 top-0"><ThemeToggle /></div>
+        </div>
         <div className="mx-auto flex w-full max-w-[342px] flex-1 flex-col justify-center py-10">
           <h1 className="mb-8 text-3xl font-semibold tracking-tight">{isLogin ? 'Bienvenido/a de vuelta' : 'Crea tu cuenta'}</h1>
           <form onSubmit={submit} className="space-y-3" noValidate>
