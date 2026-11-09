@@ -19,7 +19,7 @@ export function Shell({ children, back }: { children: ReactNode; back?: boolean 
   const { user, logout } = useAuth()
   return (
     <div className="min-h-screen bg-paper">
-      <header className="rounded-b-3xl bg-white shadow-sm">
+      <header className="bg-white shadow-sm">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-5">
           <Link to="/" aria-label="Ir al inicio"><Logo /></Link>
           {back ? (
