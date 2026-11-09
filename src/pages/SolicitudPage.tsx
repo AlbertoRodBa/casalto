@@ -42,7 +42,7 @@ function validate(step: number, d: Draft): Errors {
   return e
 }
 
-export default function Wizard() {
+export default function SolicitudPage() {
   const { user } = useAuth()
   const nav = useNavigate()
   const [step, setStep] = useState(0)
