@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #2b5b8a;
-  --color-tint: #e6edf6;
+  --color-brand: #556b2f;
+  --color-tint: #e8eddc;
   --color-paper: #f4f3ee;
   --font-sans: "Inter", system-ui, sans-serif;
 }
 
 .dark {
   color-scheme: dark;
-  --color-brand: #356b9c;
-  --color-tint: #1b3550;
-  --color-paper: #080d18;
-  --color-white: #172235;
-  --color-slate-50: #080d18;
-  --color-slate-100: #111d2e;
-  --color-slate-200: #26364a;
-  --color-slate-300: #43546a;
+  --color-brand: #557638;
+  --color-tint: #26351d;
+  --color-paper: #080d0a;
+  --color-white: #172117;
+  --color-slate-50: #080d0a;
+  --color-slate-100: #111d14;
+  --color-slate-200: #26362a;
+  --color-slate-300: #435649;
   --color-slate-400: #94a3b8;
   --color-slate-500: #94a3b8;
   --color-slate-600: #cbd5e1;
@@ -33,12 +33,12 @@
   --color-amber-800: #fcd34d;
 }
 
-.dark .text-brand { color: #a7d2fa; }
+.dark .text-brand { color: #c3dda1; }
 
 .dark .btn-outline {
-  border-color: #43546a;
-  background-color: #172235;
-  color: #bfdbfe;
+  border-color: #435649;
+  background-color: #172117;
+  color: #c3dda1;
 }
 
 @layer components {

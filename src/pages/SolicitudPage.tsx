@@ -81,7 +81,7 @@ export default function SolicitudPage() {
               <div role="radiogroup" aria-label="Plan" className="grid gap-3 sm:grid-cols-2">
                 {(Object.keys(PLANS) as (keyof typeof PLANS)[]).map(k => (
                   <label key={k} className={`cursor-pointer rounded-xl border-2 p-4 ${d.plan === k ? 'border-brand bg-tint' : 'border-slate-200'}`}>
-                    <input type="radio" name="plan" className="accent-[#2b5b8a]" checked={d.plan === k} onChange={() => set({ plan: k })} />
+                    <input type="radio" name="plan" className="accent-brand" checked={d.plan === k} onChange={() => set({ plan: k })} />
                     <span className="ml-2 font-semibold">{PLANS[k].name}</span>
                     <p className="my-2 text-3xl font-semibold">{PLANS[k].pct}%</p>
                     <ul className="space-y-1 text-xs text-slate-700">{PLANS[k].perks.map(p => <li key={p}>✓ {p}</li>)}</ul>
@@ -129,7 +129,7 @@ export default function SolicitudPage() {
 
             <section className="card space-y-4">
               <label className="flex items-center gap-3 font-medium">
-                <input type="checkbox" className="h-5 w-5 accent-[#2b5b8a]" checked={d.rented} onChange={e => set({ rented: e.target.checked })} />
+                <input type="checkbox" className="h-5 w-5 accent-brand" checked={d.rented} onChange={e => set({ rented: e.target.checked })} />
                 La propiedad ya está arrendada
               </label>
               {d.rented && (
@@ -218,7 +218,7 @@ export default function SolicitudPage() {
               ['Cuenta', `${o.bank} · ${o.accountType} · ${o.account}`]]} />
             <Block title="Documentos" onEdit={() => go(2)} rows={DOCS.filter(x => !x.onlyIfRented || d.rented).map(x => [x.label, d.docs[x.key] ?? '—'])} />
             <label className="flex items-start gap-3 text-sm">
-              <input type="checkbox" className="mt-0.5 h-5 w-5 accent-[#2b5b8a]" checked={accepted} onChange={e => setAccepted(e.target.checked)} />
+              <input type="checkbox" className="mt-0.5 h-5 w-5 accent-brand" checked={accepted} onChange={e => setAccepted(e.target.checked)} />
               <span>Declaro que los datos son correctos y autorizo a Casalto a tratarlos para gestionar el arriendo de mi propiedad.</span>
             </label>
             {tried && !accepted && <p role="alert" className="text-xs text-red-600">Debes aceptar para enviar la solicitud.</p>}

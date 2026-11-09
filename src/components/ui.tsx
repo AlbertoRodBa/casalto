@@ -6,7 +6,7 @@ import type { Status } from '../types'
 
 export const Logo = () => (
   <div className="flex items-center gap-2.5">
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2b5b8a" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="text-brand" aria-hidden="true">
       <path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" /><path d="M9.5 21v-6h5v6" />
     </svg>
     <div>
