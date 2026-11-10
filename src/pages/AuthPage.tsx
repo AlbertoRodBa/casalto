@@ -24,7 +24,7 @@ export default function AuthPage({ mode }: { mode: 'login' | 'register' }) {
     <div className="grid min-h-screen bg-white md:grid-cols-2">
       <div className="flex flex-col p-8">
         <div className="relative flex justify-center">
-          <Logo />
+          <Link to="/" aria-label="Ir al inicio"><Logo /></Link>
           <div className="absolute right-0 top-0"><ThemeToggle /></div>
         </div>
         <div className="mx-auto flex w-full max-w-[342px] flex-1 flex-col justify-center py-10">
